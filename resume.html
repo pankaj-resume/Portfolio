@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Free Resume Pro</title>
+
+<meta name="description" content="Free Professional Resume Builder with 10 templates and one click PDF download">
+
+<meta name="keywords" content="resume builder, free resume maker, CV builder online, resume template">
+
+<meta name="author" content="Pankaj Deka">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://yourwebsite.com">
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f2f2f2;
+}
+
+
+.container{
+display:flex;
+height:100vh;
+}
+
+/* FORM */
+
+.form{
+width:35%;
+background:white;
+padding:20px;
+overflow:auto;
+border-right:1px solid #ccc;
+}
+
+input,textarea,select,button{
+width:100%;
+padding:8px;
+margin:6px 0;
+font-size:14px;
+}
+
+/* PREVIEW */
+
+.preview{
+width:65%;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+background:#ddd;
+padding:20px;
+overflow:auto;
+}
+
+/* RESUME PAGE */
+
+.resume{
+width:210mm;
+min-height:297mm;
+background:white;
+display:flex;
+box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+/* LEFT */
+
+.left{
+width:35%;
+background:#0dcaf0;
+padding:20px;
+color:black;
+}
+
+.left img{
+width:120px;
+height:120px;
+border-radius:50%;
+display:block;
+margin:auto;
+object-fit:cover;
+}
+
+.left h3{
+border-bottom:1px solid #000;
+padding-bottom:4px;
+}
+
+.left ul{
+padding-left:18px;
+}
+
+/* RIGHT */
+
+.right{
+width:65%;
+padding:25px;
+}
+
+.right h1{
+margin:0;
+font-size:28px;
+}
+
+.section{
+margin-top:15px;
+}
+
+.section h3{
+border-bottom:2px solid #ccc;
+padding-bottom:4px;
+}
+
+/* TEMPLATES */
+
+.template1 .left{background:#0dcaf0}
+.template2 .left{background:#2c3e50;color:white}
+.template3 .left{background:#27ae60;color:white}
+.template4 .left{background:#8e44ad;color:white}
+.template5 .left{background:#34495e;color:white}
+.template6 .left{background:#111;color:white}
+.template7 .left{background:#f1f1f1;color:black}
+.template8 .left{background:#d35400;color:white}
+.template9 .left{background:#c0392b;color:white}
+.template10 .left{background:#16a085;color:white}
+
+/* PRINT */
+
+@media print{
+
+.form{
+display:none;
+}
+
+.preview{
+width:100%;
+background:white;
+}
+
+.resume{
+-webkit-print-color-adjust:exact;
+print-color-adjust:exact;
+box-shadow:none;
+}
+
+body{
+background:white;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- FORM -->
+
+<div class="form">
+
+<h2>Advanced Resume Builder</h2>
+
+<input id="name" placeholder="Full Name" oninput="updateResume()">
+<input id="phone" placeholder="Phone" oninput="updateResume()">
+<input id="email" placeholder="Email" oninput="updateResume()">
+<input id="address" placeholder="Address" oninput="updateResume()">
+<input id="dob" placeholder="Date of Birth" oninput="updateResume()">
+
+<textarea id="objective" placeholder="Career Objective" oninput="updateResume()"></textarea>
+
+<textarea id="education" placeholder="Education" oninput="updateResume()"></textarea>
+
+<textarea id="skills" placeholder="Skills (comma separated)" oninput="updateResume()"></textarea>
+
+<textarea id="achievement" placeholder="Achievement" oninput="updateResume()"></textarea>
+
+<textarea id="experience" placeholder="Experience" oninput="updateResume()"></textarea>
+
+<input id="mother" placeholder="Mother Name" oninput="updateResume()">
+<input id="gender" placeholder="Gender" oninput="updateResume()">
+<input id="nationality" placeholder="Nationality" oninput="updateResume()">
+<input id="Marital" placeholder="Marital Status" oninput="updateResume()"><input id="language" placeholder="Languages" oninput="updateResume()">
+
+<input id="date" placeholder="Date" oninput="updateResume()">
+<input id="place" placeholder="Place" oninput="updateResume()">
+<input id="signature" placeholder="Signature Name" oninput="updateResume()">
+
+<input type="file" id="photo" onchange="loadPhoto()">
+
+<select onchange="changeTemplate(this.value)">
+<option value="1">Template 1</option>
+<option value="2">Template 2</option>
+<option value="3">Template 3</option>
+<option value="4">Template 4</option>
+<option value="5">Template 5</option>
+<option value="6">Template 6</option>
+<option value="7">Template 7</option>
+<option value="8">Template 8</option>
+<option value="9">Template 9</option>
+<option value="10">Template 10</option>
+</select>
+
+<button onclick="downloadPDF()">Download PDF</button>
+
+</div>
+
+<!-- PREVIEW -->
+
+<div class="preview">
+
+<div class="resume template1" id="resumeBox">
+
+<div class="left">
+
+<img id="rphoto">
+
+<h3>Contact</h3>
+<p id="rphone"></p>
+<p id="remail"></p>
+<p id="raddress"></p>
+
+<h3>Skills</h3>
+<ul id="rskills"></ul>
+
+</div>
+
+<div class="right">
+
+<h1 id="rname">Your Name</h1>
+
+<div class="section">
+<h3>Career Objective</h3>
+<p id="robjective"></p>
+</div>
+
+<div class="section">
+<h3>Education</h3>
+<p id="reducation"></p>
+</div>
+
+<div class="section">
+<h3>Experience</h3>
+<p id="rexperience"></p>
+</div>
+
+<div class="section">
+<h3>Achievement</h3>
+<p id="rachievement"></p>
+</div>
+
+<div class="section">
+
+<h3>Personal Details</h3>
+
+<p>
+<b>Date of Birth:</b> <span id="rdob"></span><br>
+<b>Mother Name:</b> <span id="rmother"></span><br>
+<b>Gender:</b> <span id="rgender"></span><br>
+<b>Nationality:</b> <span id="rnationality"></span><br>
+<b>Languages:</b> <span id="rlanguage"></span>
+</p>
+
+</div>
+
+<div class="section">
+
+<h3>Declaration</h3>
+
+<p>
+I hereby declare that the information provided is true to the best of my knowledge.
+</p>
+
+<p>
+Date: <span id="rdate"></span><br>
+Place: <span id="rplace"></span>
+</p>
+
+<p><b>Signature:</b> <span id="rsignature"></span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+function updateResume() {
+  document.getElementById("rname").innerText = document.getElementById("name").value;
+  document.getElementById("rphone").innerText = document.getElementById("phone").value;
+  document.getElementById("remail").innerText = document.getElementById("email").value;
+  document.getElementById("raddress").innerText = document.getElementById("address").value;
+  document.getElementById("rdob").innerText = document.getElementById("dob").value;
+  document.getElementById("robjective").innerText = document.getElementById("objective").value;
+  document.getElementById("reducation").innerText = document.getElementById("education").value;
+  document.getElementById("rexperience").innerText = document.getElementById("experience").value;
+  document.getElementById("rachievement").innerText = document.getElementById("achievement").value;
+  document.getElementById("rmother").innerText = document.getElementById("mother").value;
+  document.getElementById("rgender").innerText = document.getElementById("gender").value;
+  document.getElementById("rnationality").innerText = document.getElementById("nationality").value;
+  document.getElementById("rlanguage").innerText = document.getElementById("language").value;
+  document.getElementById("rdate").innerText = document.getElementById("date").value;
+  document.getElementById("rplace").innerText = document.getElementById("place").value;
+  document.getElementById("rsignature").innerText = document.getElementById("signature").value;
+
+  // Skills list
+  const skillsList = document.getElementById("skills").value;
+  document.getElementById("rskills").innerHTML = "<li>" + skillsList.replaceAll(",", "</li><li>") + "</li>";
+}
+
+function loadPhoto(){
+
+let file=document.getElementById("photo").files[0]
+
+if(file){
+
+let reader=new FileReader()
+
+reader.onload=function(){
+document.getElementById("rphoto").src=reader.result
+}
+
+reader.readAsDataURL(file)
+
+}
+
+}
+
+function changeTemplate(t){
+
+let resume=document.getElementById("resumeBox")
+
+resume.className="resume template"+t
+
+}
+
+function downloadPDF(){
+window.print()
+}
+
+</script>
+
+</body>
+</html>
