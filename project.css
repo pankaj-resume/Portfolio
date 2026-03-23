@@ -1,0 +1,105 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+/* NAVBAR */
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  background:#1e293b;
+  flex-wrap:wrap;
+}
+
+nav a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+}
+
+nav a:hover{
+  color:#38bdf8;
+}
+
+/* PROJECT */
+.projects{
+  padding:40px 20px;
+  text-align:center;
+}
+
+.projects-container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  margin-top:20px;
+}
+
+/* CARD */
+.project-card{
+  background:#1e293b;
+  width:280px;
+  border-radius:10px;
+  overflow:hidden;
+  transition:0.3s;
+}
+
+/* IMAGE */
+.project-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+/* CONTENT */
+.project-content{
+  padding:15px;
+}
+
+.project-content h3{
+  color:#38bdf8;
+}
+
+.project-content p{
+  font-size:14px;
+  color:#cbd5f5;
+}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 15px;
+  background:#38bdf8;
+  color:black;
+  text-decoration:none;
+  border-radius:6px;
+}
+
+/* HOVER */
+.project-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 15px #38bdf8;
+}
+
+/* N8N SECTION */
+.n8n-section{
+  text-align:center;
+  padding:40px 20px;
+}
+
+.n8n-section img{
+  width:90%;
+  max-width:900px;
+  margin:15px 0;
+  border-radius:10px;
+}
+
+/* HOVER EFFECT */
+.n8n-section img:hover{
+  transform:scale(1.03);
+  transition:0.3s;
+}
