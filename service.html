@@ -1,15 +1,110 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="weather.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #020617;
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+nav h2 {
+  color: #38bdf8;
+}
+
+nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+/* HERO (BACKGROUND IMAGE) */
+.hero {
+  height: 60vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+              url("images.jpeg");
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 36px;
+}
+
+.hero span {
+  color: #38bdf8;
+}
+
+/* SERVICES */
+.services {
+  padding: 100px 20px 60px;
+  text-align: center;
+}
+
+.services h2 {
+  color: #38bdf8;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(56,189,248,0.5);
+}
+
+/* GRID */
+.service-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  padding: 25px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(56,189,248,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(56,189,248,0.6);
+}
+</style>
+
 </head>
 
 <body>
-  <!-- NAVBAR -->
+
+<!-- NAVBAR -->
 <nav>
   <h2>My Business</h2>
   <div>
@@ -19,30 +114,52 @@
   </div>
 </nav>
 
+<!-- HERO -->
+<section class="hero">
+  <h1>Our <span>Services</span></h1>
+</section>
+
 <!-- SERVICES -->
 <section class="services" id="services">
-  <h2>Our Services</h2>
+  <h2>What We Offer</h2>
 
   <div class="service-box">
 
     <div class="card">
-      <h3>Web Design</h3>
+      <h3>🌐 Web Design</h3>
       <p>Beautiful and responsive website design.</p>
     </div>
 
     <div class="card">
-      <h3>Marketing</h3>
+      <h3>📈 Marketing</h3>
       <p>Grow your business with smart strategies.</p>
     </div>
 
     <div class="card">
-      <h3>Support</h3>
+      <h3>💬 Support</h3>
       <p>24/7 support for your business growth.</p>
     </div>
 
   </div>
 </section>
 
-</body>
+<script>
+// Scroll Animation
+const cards = document.querySelectorAll(".card");
 
+function showCards() {
+  cards.forEach(card => {
+    const top = card.getBoundingClientRect().top;
+    if (top < window.innerHeight - 50) {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+    }
+  });
+}
+
+window.addEventListener("load", showCards);
+window.addEventListener("scroll", showCards);
+</script>
+
+</body>
 </html>
