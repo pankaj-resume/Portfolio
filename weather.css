@@ -1,0 +1,144 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #020617;
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.05);
+  position: sticky;
+  top: 0;
+}
+
+nav h2 {
+  color: #38bdf8;
+}
+
+nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+/* HERO BACKGROUND */
+.hero {
+  height: 100vh;
+  position: relative;
+
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+              url("business-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeIn 1.5s ease;
+}
+
+/* GLASS BLUR OVERLAY */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+}
+
+/* HERO TEXT */
+.hero h1 {
+  font-size: 42px;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.hero span {
+  color: #38bdf8;
+}
+
+.hero p {
+  z-index: 1;
+  color: #ddd;
+}
+
+/* BUTTON */
+.btn {
+  z-index: 1;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #38bdf8;
+  color: black;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  background: #0ea5e9;
+}
+
+/* SERVICES */
+.services {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.service-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+/* GLASS CARD */
+.card {
+  padding: 25px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transition: 0.4s;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+}
+
+/* CONTACT */
+.contact {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+input, textarea {
+  width: 80%;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+button {
+  padding: 10px 25px;
+  border-radius: 8px;
+  border: none;
+  background: #38bdf8;
+  cursor: pointer;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}

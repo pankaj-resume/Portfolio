@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="weather.css" />
+   
+</head>
+<body>
+  
+<!-- NAVBAR -->
+<nav>
+  <h2>My Business</h2>
+  <div>
+    <a href="weather.html">Home</a>
+    <a href="service.html">Services</a>
+    <a href="phone.html">Contact</a>
+  </div>
+</nav>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+
+  <input type="text" placeholder="Your Name"><br>
+  <input type="email" placeholder="Your Email"><br>
+  <textarea placeholder="Your Message"></textarea><br>
+
+  <button onclick="sendMsg()">Send</button>
+</section>
+
+<!-- JS START -->
+<script>
+
+// 🔹 Typing Effect
+const text = "We provide modern solutions for your business growth.";
+let i = 0;
+
+function typingEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typingEffect, 40);
+  }
+}
+
+typingEffect();
+
+
+// 🔹 Smooth Scroll
+document.querySelectorAll("a").forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    if (this.getAttribute("href").startsWith("#")) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  });
+});
+
+
+// 🔹 Button Click Alert
+function sendMsg() {
+  alert("Message Sent Successfully!");
+}
+
+</script>
+
+</body>
+</html>
