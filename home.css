@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+/* BODY */
 body {
   font-family: 'Inter', sans-serif;
   background: #020617;
@@ -83,6 +84,86 @@ body {
   border-radius: 20px;
 }
 
+/* SOCIAL ICONS */
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #1e293b;
+  border-radius: 50%;
+  color: white;
+  margin: 0 10px;
+  font-size: 22px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #3b82f6;
+  transform: scale(1.2);
+}
+
+/* ========================= */
+/* 🔥 VIDEO AUTO SCROLL */
+/* ========================= */
+
+.video-scroll {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 20px 0;
+}
+
+.video-track {
+  display: flex;
+  gap: 15px;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.video-track video {
+  width: 280px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* RIGHT → LEFT ANIMATION */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* EDGE FADE EFFECT */
+.video-scroll::before,
+.video-scroll::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+}
+
+.video-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, #020617, transparent);
+}
+
+.video-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, #020617, transparent);
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .hero {
@@ -93,27 +174,15 @@ body {
   .hero-right img {
     margin-top: 20px;
   }
-}
-.social-icons {
-  margin-top: 20px;
-}
 
-.social-icons a {
-  color: white;
-  margin: 0 10px;
-  font-size: 22px;
-  transition: 0.3s;
+  .video-track video {
+    width: 220px;
+    height: 130px;
+  }
 }
-
-.social-icons a:hover {
-  color: #3b82f6;
-  transform: scale(1.2);
-}.social-icons a {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  background: #1e293b;
-  border-radius: 50%;
+body{
+  background-image: url('subtle-cinematics-KEI-VNDi0_g-unsplash.jpg'); /* yaha image lagao */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

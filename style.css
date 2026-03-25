@@ -85,3 +85,9 @@ h1 {
   height: auto;
   margin: 10px 0;
 }
+body{
+  background-image: url('faded_gallery-OfdOEdGYiuk-unsplash.jpg'); /* yaha image lagao */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

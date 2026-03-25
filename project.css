@@ -103,3 +103,71 @@ nav a:hover{
   transform:scale(1.03);
   transition:0.3s;
 }
+/* ========================= */
+/* 🔥 VIDEO AUTO SCROLL */
+/* ========================= */
+
+.video-scroll {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 20px 0;
+}
+
+.video-track {
+  display: flex;
+  gap: 15px;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.video-track video {
+  width: 280px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* EDGE FADE EFFECT */
+.video-scroll::before,
+.video-scroll::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+}
+
+.video-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, #020617, transparent);
+}
+
+.video-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, #020617, transparent);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-right img {
+    margin-top: 20px;
+  }
+
+  .video-track video {
+    width: 220px;
+    height: 130px;
+  }
+}
+body{
+  background-image: url('abstract-digital-grid-black-background.jpg'); /* yaha image lagao */
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+}

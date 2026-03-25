@@ -105,3 +105,15 @@ footer a{
   transform:scale(1.03);
   transition:0.3s;
 }
+body{
+  background-image: url('lee-campbell-DtDlVpy-vvQ-unsplash.jpg'); /* yaha image lagao */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+body{
+  background-image: url('images (1).jpeg'); /* yaha image lagao */
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+}
