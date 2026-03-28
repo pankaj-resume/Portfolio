@@ -170,4 +170,10 @@ body{
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
+}.slider {
+  width: 100%;
+  overflow: hidden;
+  background: lack;
+  padding: 20px 0;
 }
+

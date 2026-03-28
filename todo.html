@@ -1,231 +1,201 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Task Manager Pro</title>
+  <title>Task Manager Ultimate</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
+  <!-- jsPDF + XLSX -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-    body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 
-    .app {
-      background: #0f172a;
-      padding: 20px;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+body{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  display:flex;justify-content:center;align-items:center;
+  min-height:100vh;color:white;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
+.app{
+  background:#0f172a;padding:20px;border-radius:20px;
+  width:100%;max-width:450px;
+  animation:fadeIn 0.5s ease;
+}
 
-    #counter {
-      text-align: center;
-      font-size: 14px;
-      color: #94a3b8;
-      margin-bottom: 10px;
-    }
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;}
+}
 
-    input {
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 14px;
-      width: 100%;
-      margin-top: 10px;
-    }
+input,select,button{
+  width:100%;padding:10px;margin-top:8px;
+  border-radius:10px;border:none;
+}
 
-    .add-btn {
-      background: #22c55e;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 10px;
-      width: 100%;
-      font-weight: bold;
-    }
+button{cursor:pointer;font-weight:bold;}
+button:active{transform:scale(0.95);}
 
-    ul {
-      margin-top: 15px;
-    }
+.add{background:#22c55e;color:white;}
+.clear{background:#ef4444;color:white;}
+.download{background:#3b82f6;color:white;}
 
-    li {
-      background: #1e293b;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
+li{
+  background:#1e293b;padding:10px;margin-top:8px;
+  border-radius:10px;animation:slide 0.3s;
+}
 
-    .task-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+@keyframes slide{
+  from{transform:translateX(-30px);opacity:0;}
+}
 
-    .task-text {
-      cursor: pointer;
-    }
+.done{text-decoration:line-through;opacity:0.6;}
 
-    .done {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 6px;
-    }
-
-    .edit-btn {
-      background: #f59e0b;
-      border: none;
-      padding: 5px 8px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-    }
-
-    .delete-btn {
-      background: #ef4444;
-      border: none;
-      padding: 5px 8px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-    }
-
-    small {
-      color: #94a3b8;
-    }
-  </style>
+small{color:#94a3b8;}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
-    <h1>📝 Task Manager</h1>
+<div class="app">
+<h2>📝 Task Ultimate</h2>
 
-    <p id="counter"></p>
+<p id="counter"></p>
 
-    <input type="text" id="search" placeholder="🔍 Search task..." onkeyup="searchTask()">
+<input id="task" placeholder="Enter task">
+<input type="date" id="date">
 
-    <input type="text" id="task" placeholder="Enter your task...">
-    <input type="date" id="date">
+<select id="priority">
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
 
-    <button class="add-btn" onclick="addTask()">+ Add Task</button>
+<button class="add" onclick="addTask()">Add Task</button>
 
-    <ul id="list"></ul>
-  </div>
+<button class="clear" onclick="clearAll()">Clear All</button>
 
-  <script>
-    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+<button class="download" onclick="downloadTXT()">Download TXT</button>
+<button class="download" onclick="downloadPDF()">Download PDF</button>
+<button class="download" onclick="downloadExcel()">Download Excel</button>
 
-    function saveData() {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
+<ul id="list"></ul>
+</div>
 
-    function updateCounter() {
-      let total = tasks.length;
-      let completed = tasks.filter(task => task.done).length;
+<script>
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-      document.getElementById("counter").innerText =
-        `Total: ${total} | Completed: ${completed}`;
-    }
+function save(){
+  localStorage.setItem("tasks",JSON.stringify(tasks));
+}
 
-    function showTasks() {
-      let list = document.getElementById("list");
-      list.innerHTML = "";
+function show(){
+  let list=document.getElementById("list");
+  list.innerHTML="";
 
-      tasks.forEach((task, index) => {
-        let li = document.createElement("li");
+  tasks.forEach((t,i)=>{
+    let li=document.createElement("li");
 
-        li.innerHTML = `
-          <div class="task-top">
-            <span class="task-text ${task.done ? 'done' : ''}" onclick="toggleDone(${index})">
-              ${task.text}
-            </span>
-            <div class="buttons">
-              <button class="edit-btn" onclick="editTask(${index})">Edit</button>
-              <button class="delete-btn" onclick="deleteTask(${index})">X</button>
-            </div>
-          </div>
-          <small>${task.date || "No date"}</small>
-        `;
+    li.innerHTML=`
+    <span class="${t.done?'done':''}" onclick="toggle(${i})">${t.text}</span>
+    <br>
+    <small>${t.date||"No date"} | ${t.priority}</small>
+    <br>
+    <button onclick="del(${i})">X</button>
+    `;
 
-        list.appendChild(li);
-      });
+    list.appendChild(li);
+  });
 
-      updateCounter();
-    }
+  document.getElementById("counter").innerText=
+  "Total:"+tasks.length+" Done:"+tasks.filter(t=>t.done).length;
+}
 
-    function addTask() {
-      let text = document.getElementById("task").value;
-      let date = document.getElementById("date").value;
+function addTask(){
+  let text=task.value;
+  if(!text)return alert("Enter task");
 
-      if (text === "") return;
+  tasks.push({
+    text,
+    date:date.value,
+    priority:priority.value,
+    done:false
+  });
 
-      tasks.push({ text, date, done: false });
-      saveData();
+  task.value="";date.value="";
+  save();show();
+}
 
-      document.getElementById("task").value = "";
-      document.getElementById("date").value = "";
+function del(i){
+  tasks.splice(i,1);
+  save();show();
+}
 
-      showTasks();
-    }
+function toggle(i){
+  tasks[i].done=!tasks[i].done;
+  save();show();
+}
 
-    function deleteTask(index) {
-      tasks.splice(index, 1);
-      saveData();
-      showTasks();
-    }
+function clearAll(){
+  if(confirm("Delete all?")){
+    tasks=[];save();show();
+  }
+}
 
-    function toggleDone(index) {
-      tasks[index].done = !tasks[index].done;
-      saveData();
-      showTasks();
-    }
+//////////////// TXT //////////////////
+function downloadTXT(){
+  let data="TASK DATA\n\n";
 
-    function editTask(index) {
-      let newTask = prompt("Edit task:", tasks[index].text);
-      if (newTask) {
-        tasks[index].text = newTask;
-        saveData();
-        showTasks();
-      }
-    }
+  tasks.forEach((t,i)=>{
+    data+=`Task ${i+1}\n${t.text}\n${t.date}\n${t.priority}\n${t.done?"Done":"Pending"}\n\n`;
+  });
 
-    function searchTask() {
-      let value = document.getElementById("search").value.toLowerCase();
-      let items = document.querySelectorAll("li");
+  let blob=new Blob([data],{type:"text/plain"});
+  let a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="tasks.txt";
+  a.click();
+}
 
-      items.forEach(item => {
-        let text = item.innerText.toLowerCase();
+//////////////// PDF //////////////////
+function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  let doc=new jsPDF();
 
-        item.style.display = text.includes(value) ? "block" : "none";
-      });
-    }
+  let y=10;
 
-    showTasks();
-  </script>
+  tasks.forEach((t,i)=>{
+    doc.text(`Task ${i+1}: ${t.text}`,10,y);
+    y+=7;
+    doc.text(`Date: ${t.date}`,10,y);
+    y+=7;
+    doc.text(`Priority: ${t.priority}`,10,y);
+    y+=7;
+    doc.text(`Status: ${t.done?"Done":"Pending"}`,10,y);
+    y+=10;
+  });
+
+  doc.save("tasks.pdf");
+}
+
+//////////////// EXCEL //////////////////
+function downloadExcel(){
+  let data = tasks.map(t=>({
+    Task:t.text,
+    Date:t.date,
+    Priority:t.priority,
+    Status:t.done?"Done":"Pending"
+  }));
+
+  let ws = XLSX.utils.json_to_sheet(data);
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Tasks");
+
+  XLSX.writeFile(wb, "tasks.xlsx");
+}
+
+show();
+</script>
 
 </body>
 </html>
