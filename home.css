@@ -186,3 +186,11 @@ body{
   background-position: center;
   background-repeat: no-repeat;
 }
+
+hero{
+  background-image: url("subtle-cinematics-KEI-VNDi0_g-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+ 
+}
