@@ -126,3 +126,114 @@ body{
   object-fit: cover;
   z-index: -1;
 }
+/* ⭐ Rating Section */
+.rating-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: #0f172a;
+  color: white;
+}
+
+.rating-section h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.overall-rating {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: gold;
+}
+
+.rating-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.rating-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  max-width: 320px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.rating-card:hover {
+  transform: translateY(-10px);
+}
+
+.rating-card h3 {
+  color: gold;
+  font-size: 22px;
+}
+
+.rating-text {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.review {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.client-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* CTA */
+.rating-cta {
+  margin-top: 40px;
+}
+
+.contact-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 25px;
+  background: linear-gradient(45deg, #6366f1, #a855f7);
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(168,85,247,0,6);
+}
+
+.contact-btn:hover {
+  opacity: 0.8;
+}
+@media (max-width: 768px) {
+  .rating-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.review-form {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+  width: 80%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.review-form button {
+  padding: 10px 20px;
+  background: #6366f1;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
